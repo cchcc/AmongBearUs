@@ -507,6 +507,7 @@ MonoBehaviour:
   speed: 4
   joyStick: {fileID: 1411824150}
   settings: {fileID: 516906392}
+  canMove: 1
 --- !u!212 &261188455
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -910,9 +911,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJoyStick: 0
-  touchButton: {fileID: 1041840755}
-  joyStickButton: {fileID: 221843409}
+  touchButtonImage: {fileID: 1041840755}
+  joyStickButtonImage: {fileID: 221843409}
   selectedColor: {r: 0.30015132, g: 0.6478853, b: 0.8962264, a: 1}
+  playerController: {fileID: 261188454}
+  settingButton: {fileID: 551781555}
 --- !u!1 &541007356
 GameObject:
   m_ObjectHideFlags: 0
