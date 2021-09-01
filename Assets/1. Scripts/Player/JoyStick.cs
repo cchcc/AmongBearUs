@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JoyStick : MonoBehaviour
@@ -9,12 +7,14 @@ public class JoyStick : MonoBehaviour
     private bool isDrag;
     private float limit;
     private PlayerController playerController;
-
+    
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         limit = backGround.rect.width * 0.5f;
         playerController = GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,10 +31,21 @@ public class JoyStick : MonoBehaviour
             var direction = (stick.position - backGround.position).normalized;
             transform.position += direction * playerController.speed * Time.deltaTime;
             
+            var movingLeft = direction.x < 0;
+            if (movingLeft)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);  // 캐릭 이미지 이동방향에 따라 좌우 반전
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);  // 캐릭 이미지 이동방향에 따라 좌우 반전
+            }
+            
             if (Input.GetMouseButtonUp(0))
             {
                 stick.localPosition = new Vector3(0, 0, 0);
                 isDrag = false;
+                animator.SetBool("IsWalk", false);
             }
         }
     }
@@ -42,5 +53,6 @@ public class JoyStick : MonoBehaviour
     public void ClickedStick()
     {
         isDrag = true;
+        animator.SetBool("IsWalk", true);
     }
 }
