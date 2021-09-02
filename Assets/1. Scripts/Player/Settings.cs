@@ -12,10 +12,15 @@ public class Settings : MonoBehaviour
     public PlayerController playerController;
     public GameObject settingButton;
     
+    public GameObject mainMenuUI;
+    public GameObject missionUI;
+    
     // Start is called before the first frame update
     void Start()
     {
         touchButtonImage.color = selectedColor;
+        mainMenuUI = playerController.mainMenuUI;
+        missionUI = playerController.missionUI;
     }
 
     // Update is called once per frame
@@ -50,5 +55,12 @@ public class Settings : MonoBehaviour
         isJoyStick = true;
         touchButtonImage.color = Color.white;
         joyStickButtonImage.color = selectedColor;
+    }
+
+    public void ClickedQuit()
+    {
+        mainMenuUI.SetActive(true);
+        missionUI.SetActive(false);
+        playerController.DestroyPlayer();
     }
 }

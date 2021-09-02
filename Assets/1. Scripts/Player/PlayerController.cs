@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,8 +8,13 @@ public class PlayerController : MonoBehaviour
     public GameObject joyStick;
     public Settings settings;
     public bool canMove = true;
-    
-    private  Animator animator;
+    public GameObject mainMenuUI;
+    public GameObject missionUI;
+    public Button useButton;
+
+    private Animator animator;
+    private GameObject collidedMission;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -47,11 +53,11 @@ public class PlayerController : MonoBehaviour
                     var movingLeft = direction.x < 0;
                     if (movingLeft)
                     {
-                        transform.localScale = new Vector3(-1, 1, 1); // 캐릭 이미지 이동방향에 따라 좌우 반전
+                        transform.localScale = new Vector3(-1, 1, 1); // 이동방향에 따라 캐릭터 이미지 좌우 반전
                     }
                     else
                     {
-                        transform.localScale = new Vector3(1, 1, 1); // 캐릭 이미지 이동방향에 따라 좌우 반전
+                        transform.localScale = new Vector3(1, 1, 1); // 이동방향에 따라 캐릭터 이미지 좌우 반전
                     }
                 }
                 else
@@ -60,5 +66,39 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void DestroyPlayer()
+    {
+        Camera.main.transform.parent = null;
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Mission"))
+        {
+            useButton.interactable = true;
+            collidedMission = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        useButton.interactable = false;
+        collidedMission = null;
+    }
+
+    public void ClickedUse()
+    {
+        collidedMission.SendMessage("StartMission");
+        canMove = false;
+        useButton.interactable = false;
+    }
+
+    public void EndMission()
+    {
+        canMove = true;
+        useButton.interactable = true;
     }
 }
