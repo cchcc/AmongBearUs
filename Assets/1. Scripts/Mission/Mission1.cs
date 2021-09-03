@@ -16,6 +16,7 @@ public class Mission1 : MonoBehaviour
 
     public void StartMission()
     {
+        Debug.Log("StartMission 1");
         animator.SetBool("IsUp", true);
         playerController = FindObjectOfType<PlayerController>();
 
@@ -55,6 +56,7 @@ public class Mission1 : MonoBehaviour
 
     private void SuccessMission()
     {
+        Debug.Log("SuccessMission 1");
         ClickedCancel();
     }
 }
