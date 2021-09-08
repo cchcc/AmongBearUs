@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,20 +11,13 @@ public class Settings : MonoBehaviour
     public GameObject settingButton;
     
     public GameObject mainMenuUI;
-    public GameObject missionUI;
+    public GameObject playUI;
     
-    // Start is called before the first frame update
     void Start()
     {
         touchButtonImage.color = selectedColor;
         mainMenuUI = playerController.mainMenuUI;
-        missionUI = playerController.missionUI;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        playUI = playerController.playUI;
     }
     
     public void ClickedSetting()
@@ -60,7 +51,7 @@ public class Settings : MonoBehaviour
     public void ClickedQuit()
     {
         mainMenuUI.SetActive(true);
-        missionUI.SetActive(false);
+        playUI.SetActive(false);
         playerController.DestroyPlayer();
     }
 }

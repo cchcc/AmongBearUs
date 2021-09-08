@@ -10,6 +10,7 @@ public class Mission5 : MonoBehaviour
     
     private Animator animator;
     private PlayerController playerController;
+    private MissionControl missionControl;
     private RectTransform rectTransformHandle;
     private bool isDragHandle;
     private bool isStart = false; 
@@ -17,6 +18,7 @@ public class Mission5 : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        missionControl = FindObjectOfType<MissionControl>();
         rectTransformHandle = handleTransform.GetComponent<RectTransform>();
     }
     
@@ -36,8 +38,9 @@ public class Mission5 : MonoBehaviour
                 isDragHandle = false;
                 if (-5 < rectTransformHandle.anchoredPosition.y && rectTransformHandle.anchoredPosition.y < 5)
                 {
-                    Invoke(nameof(SuccessMission), 0.2f);
                     isStart = false;
+                    SuccessMission();
+                    // Invoke(nameof(SuccessMission), 0.2f);
                 }
             }
         }
@@ -86,5 +89,6 @@ public class Mission5 : MonoBehaviour
     {
         Debug.Log("SuccessMission 5");
         ClickedCancel();
+        missionControl.SuccessMission(gameObject);
     }
 }

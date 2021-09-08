@@ -9,10 +9,12 @@ public class Mission3 : MonoBehaviour
     
     private Animator animator;
     private PlayerController playerController;
+    private MissionControl missionControl;
     
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        missionControl = FindObjectOfType<MissionControl>();
     }
 
     public void StartMission()
@@ -101,5 +103,6 @@ public class Mission3 : MonoBehaviour
     {
         Debug.Log("SuccessMission 3");
         ClickedCancel();
+        missionControl.SuccessMission(gameObject);
     }
 }

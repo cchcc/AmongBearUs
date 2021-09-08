@@ -5,13 +5,17 @@ using UnityEngine.UI;
 
 public class Mission1 : MonoBehaviour
 {
-    private Animator animator;
-    private PlayerController playerController;
     public Color selectedColor;
     public Image[] hexagonImages;
+    
+    private Animator animator;
+    private PlayerController playerController;
+    private MissionControl missionControl;
+    
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        missionControl = FindObjectOfType<MissionControl>();
     }
 
     public void StartMission()
@@ -58,5 +62,6 @@ public class Mission1 : MonoBehaviour
     {
         Debug.Log("SuccessMission 1");
         ClickedCancel();
+        missionControl.SuccessMission(gameObject);
     }
 }

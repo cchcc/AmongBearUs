@@ -12,14 +12,16 @@ public class Mission2 : MonoBehaviour
     
     private Animator animator;
     private PlayerController playerController;
-    private bool isDragHandle = false;
+    private MissionControl missionControl;
+    private bool isDragHandle;
     private Vector2 originPosition;
     private RectTransform rectTransformHandle;
-    private bool isStart = false; 
+    private bool isStart ; 
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        missionControl = FindObjectOfType<MissionControl>();
         rectTransformHandle = handleTransform.GetComponent<RectTransform>();
         originPosition = rectTransformHandle.anchoredPosition;
     }
@@ -132,5 +134,6 @@ public class Mission2 : MonoBehaviour
         isDragHandle = false;
         rectTransformHandle.anchoredPosition = originPosition;
         ClickedCancel();
+        missionControl.SuccessMission(gameObject);
     }
 }

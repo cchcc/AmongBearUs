@@ -9,11 +9,13 @@ public class Mission4 : MonoBehaviour
     
     private Animator animator;
     private PlayerController playerController;
+    private MissionControl missionControl;
     private int numberCount;
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        missionControl = FindObjectOfType<MissionControl>();
     }
 
     public void StartMission()
@@ -73,5 +75,6 @@ public class Mission4 : MonoBehaviour
     {
         Debug.Log("SuccessMission 4");
         ClickedCancel();
+        missionControl.SuccessMission(gameObject);
     }
 }
