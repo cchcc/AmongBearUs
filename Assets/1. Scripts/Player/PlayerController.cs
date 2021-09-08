@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBGL
             if (!EventSystem.current.IsPointerOverGameObject()) // 터치 이벤트가 있는 오브젝트.. 가 아닌경우에만
 #else 
             if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) // 터치 이벤트가 있는 오브젝트.. 가 아닌경우에만
